@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#111315">
+    <meta name="description" content="Выберите сеанс и места в учебном кинотеатре «Тень».">
+    <title>Тень — билеты в кино</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="Тень — на главную">
+          <span class="brand-mark" aria-hidden="true">Т</span>
+          <span>ТЕНЬ</span>
+        </a>
+        <nav class="main-nav" aria-label="Основная навигация">
+          <a href="#booking">Афиша</a>
+          <a href="#booking">Выбрать места</a>
+          <a href="#my-bookings">Мои билеты</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="film-hero" aria-labelledby="film-title">
+          <div class="poster-art">
+            <img class="poster-image" src="./assets/spider-man-new-day.webp" alt="Афиша фильма «Человек-паук: Новый день»">
+          </div>
+          <div class="film-copy">
+            <p class="eyebrow">Сегодня · большой зал</p>
+            <h1 id="film-title">Человек-паук: Новый день</h1>
+            <p class="film-meta">боевик, фантастика, приключения, фэнтези <span class="meta-separator">·</span> <span class="film-duration">02 ч 30 м</span> <span class="meta-separator">·</span> 12+</p>
+            <p class="film-description">Питер Паркер, одинокий и повзрослевший, уже четыре года защищает Нью-Йорк после того, как мир забыл его благодаря заклинанию Доктора Стренджа. Но с ростом угроз его силы начинают странно меняться, угрожая самому его существованию. А новая цепочка преступлений в городе приводит к появлению одного из самых опасных врагов в его жизни.</p>
+            <div class="film-tags" aria-label="Характеристики фильма">
+              <span>2D</span>
+              <span>Русский язык</span>
+              <span>Зал 2</span>
+            </div>
+          </div>
+          <div class="film-side-note" aria-hidden="true">КИНО<br>ДЛЯ<br>БОЛЬШОГО<br>ЭКРАНА</div>
+        </section>
+
+        <section id="booking" class="booking-section" aria-labelledby="booking-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Билеты онлайн</p>
+              <h2 id="booking-title">Выбери свой ряд</h2>
+            </div>
+            <p class="section-hint">Сначала время — затем места на плане зала</p>
+          </div>
+
+          <div class="booking-layout">
+            <div class="booking-sidebar">
+              <section class="panel flow-panel" aria-labelledby="session-title">
+                <div class="panel-heading">
+                  <span class="step-number" aria-hidden="true">01</span>
+                  <div><p class="eyebrow">Время и тариф</p><h3 id="session-title">Выберите сеанс</h3></div>
+                </div>
+                <div id="session-options" class="session-options" role="group" aria-label="Сеансы фильма"></div>
+                <p id="session-note" class="panel-note"></p>
+                <div class="filter-divider"></div>
+                <div class="filter-heading">
+                  <span class="eyebrow">Фильтр мест</span>
+                  <span class="filter-context">по ценовой зоне</span>
+                </div>
+                <div id="price-options" class="price-options" role="group" aria-label="Фильтр по ценовой категории">
+                  <button type="button" class="filter-button" data-category="all" aria-pressed="true">Все места</button>
+                  <button type="button" class="filter-button" data-category="standard" aria-pressed="false">Стандарт · 420 ₽</button>
+                  <button type="button" class="filter-button" data-category="comfort" aria-pressed="false">Комфорт · 560 ₽</button>
+                </div>
+                <p class="panel-note">Ряды A–B — стандарт, C–D — комфорт.</p>
+              </section>
+
+              <section class="panel order-panel" aria-labelledby="order-title">
+                <div class="order-topline">
+                  <div><p class="eyebrow">02 · Ваш билет</p><h3 id="order-title">Ваш выбор</h3></div>
+                  <span id="selected-count" class="selection-count" aria-live="polite">0 мест</span>
+                </div>
+                <p id="order-session" class="order-session"></p>
+                <ul id="selected-seats" class="selected-seats" aria-label="Выбранные места" aria-live="polite"></ul>
+                <p id="selection-empty" class="empty-selection">Пока ничего не выбрано — нажмите на свободное место.</p>
+                <div class="price-total">
+                  <span>Итого</span>
+                  <strong id="order-total">0 ₽</strong>
+                </div>
+                <form id="booking-form" novalidate>
+                  <button id="confirm-booking" class="primary-button" type="submit">Забронировать места</button>
+                </form>
+                <p id="form-error" class="form-error" role="alert" hidden></p>
+                <p id="app-status" class="app-status" role="status" aria-live="polite"></p>
+              </section>
+            </div>
+
+            <section class="panel seat-panel" aria-labelledby="seat-title">
+              <div class="seat-panel-heading">
+                <div class="panel-heading">
+                  <span class="step-number" aria-hidden="true">03</span>
+                  <div><p class="eyebrow">План зала · 24 места</p><h3 id="seat-title">Найди своё место</h3></div>
+                </div>
+                <span id="seat-filter-label" class="current-filter">Показаны все места</span>
+              </div>
+              <div class="screen-wrap" aria-label="Экран перед зрительным залом">
+                <div class="screen-curve"></div>
+                <span>ЭКРАН</span>
+              </div>
+              <div id="seat-plan" class="seat-plan" role="group" aria-label="Интерактивный план кинозала"></div>
+              <div class="seat-legend" aria-label="Состояния мест">
+                <span><i class="legend-seat legend-free" aria-hidden="true"></i>Свободно</span>
+                <span><i class="legend-seat legend-selected" aria-hidden="true"></i>Выбрано</span>
+                <span><i class="legend-seat legend-occupied" aria-hidden="true"></i>Занято</span>
+              </div>
+              <details class="seat-list-details">
+                <summary>Открыть список мест</summary>
+                <p class="list-help">Список синхронизирован с планом. Здесь удобно выбирать места с клавиатуры.</p>
+                <ul id="seat-list" class="seat-list" aria-label="Все места выбранного сеанса"></ul>
+              </details>
+            </section>
+          </div>
+        </section>
+
+        <section id="my-bookings" class="my-bookings-section" aria-labelledby="my-bookings-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Сохраняются в этом браузере</p>
+              <h2 id="my-bookings-title">Мои билеты</h2>
+            </div>
+            <p class="section-hint">Места можно освободить кнопкой отмены</p>
+          </div>
+          <div id="storage-warning" class="storage-warning" role="status" aria-live="polite" hidden></div>
+          <p id="bookings-empty" class="bookings-empty">Пока нет оформленных билетов. Выбери сеанс и места, чтобы добавить первую бронь.</p>
+          <ul id="bookings-list" class="bookings-list" aria-label="Ваши учебные бронирования"></ul>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>ТЕНЬ</span>
+        <p>Учебное демо: бронирования сохраняются только в этом браузере. Реальная оплата и бронь не оформляются.</p>
+      </footer>
+    </div>
+  </body>
+</html>
